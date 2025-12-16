@@ -1,0 +1,11 @@
+{
+  "features": {
+    "antidelete": true,
+    "viewonce_saver": true,
+    "downloader": true,
+    "fake_typing": false,
+    "always_online": false,
+    "chatgpt": false
+  },
+  "dbPath": "./data/db.json"
+}
