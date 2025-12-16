@@ -1,7 +1,12 @@
 const { spawnSync } = require('child_process')
 const { existsSync, writeFileSync } = require('fs')
 
-const SESSION_ID = 'levanter_164ca9d3310cc848eca1fd464d573236a4' // Edit this line only, don't remove ' <- this symbol
+// Read SESSION_ID from Render environment variables
+const SESSION_ID = process.env.SESSION_ID
+
+if (!SESSION_ID) {
+  throw new Error('SESSION_ID is not set in environment variables')
+}
 
 if (!existsSync('levanter')) {
   console.log('Cloning the repository...')
@@ -20,16 +25,23 @@ if (!existsSync('levanter')) {
   const configPath = 'levanter/config.env'
   try {
     console.log('Writing to config.env...')
-    writeFileSync(configPath, `VPS=true\nSESSION_ID=${SESSION_ID}`)
+    writeFileSync(
+      configPath,
+      `VPS=true\nSESSION_ID=${SESSION_ID}\n`
+    )
   } catch (err) {
     throw new Error(`Failed to write to config.env: ${err.message}`)
   }
 
   console.log('Installing dependencies...')
-  const installResult = spawnSync('yarn', ['install', '--network-concurrency', '3'], {
-    cwd: 'levanter',
-    stdio: 'inherit',
-  })
+  const installResult = spawnSync(
+    'yarn',
+    ['install', '--network-concurrency', '3'],
+    {
+      cwd: 'levanter',
+      stdio: 'inherit',
+    }
+  )
 
   if (installResult.error) {
     throw new Error(`Failed to install dependencies: ${installResult.error.message}`)
