@@ -1,11 +1,15 @@
 {
-    "name": "ABRO-LEVANTER",
-    "version": "0.0.0",
-    "description": "Levanter WhatsApp Bot",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js"
-    },
-    "author": "Abro Tech",
-    "license": "MIT"
+  "name": "levanter-whatsapp-starter",
+  "version": "0.1.0",
+  "description": "Starter skeleton for WhatsApp bot features",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@adiwajshing/baileys": "^4.4.0",
+    "lowdb": "^3.0.0",
+    "axios": "^1.4.0"
+  }
 }
